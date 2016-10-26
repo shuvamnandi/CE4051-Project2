@@ -1,0 +1,7 @@
+INFILE=E:\project2\implementation\system.ncd
+OUTFILE=E:\project2\implementation\system.bit
+FAMILY=Zynq
+PART=xc7z020-1clg484
+WORKINGDIR=E:\project2\implementation
+LICENSE=ISE
+USER_INFO=210774966_1777502827_210638936_203

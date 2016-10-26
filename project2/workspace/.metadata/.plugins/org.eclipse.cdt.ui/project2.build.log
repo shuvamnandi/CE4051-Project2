@@ -1,0 +1,20 @@
+
+**** Build of configuration Debug for project project2 ****
+
+make all 
+Building file: ../src/zynq_audio.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../project2_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/zynq_audio.d" -MT"src/zynq_audio.d" -o"src/zynq_audio.o" "../src/zynq_audio.c"
+Finished building: ../src/zynq_audio.c
+' '
+Building target: project2.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../project2_bsp/ps7_cortexa9_0/lib -o"project2.elf"  ./src/audio.o ./src/oled.o ./src/platform.o ./src/zynq_audio.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: project2.elf
+' '
+Invoking: ARM Print Size
+arm-xilinx-eabi-size project2.elf  |tee "project2.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106576	   2280	  33504	 142360	  22c18	project2.elf
+Finished building: project2.elf.size
+' '

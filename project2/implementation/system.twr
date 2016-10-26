@@ -1,0 +1,293 @@
+--------------------------------------------------------------------------------
+Release 14.4 Trace  (nt64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\ISE14.4\14.4\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -e 3 -xml
+system.twx system.ncd system.pcf
+
+Design file:              system.ncd
+Physical constraint file: system.pcf
+Device,package,speed:     xc7z020,clg484,C,-1 (ADVANCED 1.04 2012-12-04)
+Report level:             error report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more 
+   information, see the TSI report.  Please consult the Xilinx Command Line 
+   Tools User Guide for information on generating a TSI report.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: PATH "TS_axi_interconnect_1_reset_resync_path" TIG;
+
+ 2 paths analyzed, 2 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors)
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clk_fpga_1 = PERIOD TIMEGRP "clk_fpga_1" 10 MHz HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 0 paths analyzed, 0 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 component switching limit errors)
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clk_fpga_0 = PERIOD TIMEGRP "clk_fpga_0" 100 MHz HIGH 
+50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 182216200 paths analyzed, 45019 endpoints analyzed, 267 failing endpoints
+ 267 timing errors detected. (267 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is  12.610ns.
+--------------------------------------------------------------------------------
+Slack:                  -2.610ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_6_1 (FF)
+  Destination:          default_peripheral_0/default_peripheral_0/AXI_SLAVE_BURST_I/SUPPORT_RW_TRANSACTIONS.READ_DATA_SM_I/RD_DATA_BUFFER_GEN.RDATA_FIFO_I/DYNSHREG_F_I/Mshreg_Dout_26_0 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      12.361ns (Levels of Logic = 14)
+  Clock Path Skew:      -0.214ns (1.352 - 1.566)
+  Source Clock:         processing_system7_0_FCLK_CLK0 rising at 0.000ns
+  Destination Clock:    processing_system7_0_FCLK_CLK0 rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_6_1 to default_peripheral_0/default_peripheral_0/AXI_SLAVE_BURST_I/SUPPORT_RW_TRANSACTIONS.READ_DATA_SM_I/RD_DATA_BUFFER_GEN.RDATA_FIFO_I/DYNSHREG_F_I/Mshreg_Dout_26_0
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X71Y30.CQ      Tcko                  0.456   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_6_1
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_6_1
+    SLICE_X69Y31.A4      net (fanout=5)        0.745   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_6_1
+    SLICE_X69Y31.A       Tilo                  0.124   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_5_1
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/_n2251<7>_SW0_1
+    SLICE_X69Y31.B5      net (fanout=1)        0.264   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/_n2251<7>_SW0
+    SLICE_X69Y31.B       Tilo                  0.124   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_5_1
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/_n1450<7>
+    SLICE_X64Y32.D6      net (fanout=16)       0.571   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/_n1450
+    SLICE_X64Y32.D       Tilo                  0.124   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_2_4
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data12045
+    SLICE_X64Y32.C3      net (fanout=1)        1.021   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data12044
+    SLICE_X64Y32.C       Tilo                  0.124   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_2_4
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data12047
+    SLICE_X66Y27.C4      net (fanout=1)        0.812   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data12046
+    SLICE_X66Y27.CMUX    Tilo                  0.545   default_peripheral_0/N8689
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120415_SW2_G
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120415_SW2
+    SLICE_X69Y21.A6      net (fanout=1)        0.732   default_peripheral_0/N18972
+    SLICE_X69Y21.A       Tilo                  0.124   default_peripheral_0/N11853
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120415
+    SLICE_X68Y16.B5      net (fanout=1)        0.626   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120414
+    SLICE_X68Y16.B       Tilo                  0.124   default_peripheral_0/N18762
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120427_SW0
+    SLICE_X68Y16.A4      net (fanout=1)        0.444   default_peripheral_0/N18762
+    SLICE_X68Y16.A       Tilo                  0.124   default_peripheral_0/N18762
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120427
+    SLICE_X53Y15.B6      net (fanout=1)        0.741   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120426
+    SLICE_X53Y15.B       Tilo                  0.124   default_peripheral_0/N18940
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120439_SW0
+    SLICE_X53Y15.A6      net (fanout=1)        0.483   default_peripheral_0/N18940
+    SLICE_X53Y15.A       Tilo                  0.124   default_peripheral_0/N18940
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120439
+    SLICE_X38Y26.B6      net (fanout=1)        1.050   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120438
+    SLICE_X38Y26.B       Tilo                  0.124   default_peripheral_0/N18908
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120454_SW0
+    SLICE_X38Y26.A4      net (fanout=1)        0.452   default_peripheral_0/N18908
+    SLICE_X38Y26.A       Tilo                  0.124   default_peripheral_0/N18908
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120454
+    SLICE_X39Y40.B6      net (fanout=1)        0.871   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120453
+    SLICE_X39Y40.B       Tilo                  0.124   default_peripheral_0/N18876
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120480_SW0
+    SLICE_X39Y40.A6      net (fanout=1)        0.569   default_peripheral_0/N18876
+    SLICE_X39Y40.A       Tilo                  0.124   default_peripheral_0/N18876
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data120480
+    SLICE_X36Y40.AI      net (fanout=1)        0.323   default_peripheral_0/default_peripheral_0/user_IP2Bus_Data<5>
+    SLICE_X36Y40.CLK     Tds                   0.044   axi_interconnect_1_M_RDATA<101>
+                                                       default_peripheral_0/default_peripheral_0/AXI_SLAVE_BURST_I/SUPPORT_RW_TRANSACTIONS.READ_DATA_SM_I/RD_DATA_BUFFER_GEN.RDATA_FIFO_I/DYNSHREG_F_I/Mshreg_Dout_26_0
+    -------------------------------------------------  ---------------------------
+    Total                                     12.361ns (2.657ns logic, 9.704ns route)
+                                                       (21.5% logic, 78.5% route)
+
+--------------------------------------------------------------------------------
+Slack:                  -2.502ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_1 (FF)
+  Destination:          default_peripheral_0/default_peripheral_0/AXI_SLAVE_BURST_I/SUPPORT_RW_TRANSACTIONS.READ_DATA_SM_I/RD_DATA_BUFFER_GEN.RDATA_FIFO_I/DYNSHREG_F_I/Mshreg_Dout_16_0 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      12.350ns (Levels of Logic = 12)
+  Clock Path Skew:      -0.117ns (0.759 - 0.876)
+  Source Clock:         processing_system7_0_FCLK_CLK0 rising at 0.000ns
+  Destination Clock:    processing_system7_0_FCLK_CLK0 rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_1 to default_peripheral_0/default_peripheral_0/AXI_SLAVE_BURST_I/SUPPORT_RW_TRANSACTIONS.READ_DATA_SM_I/RD_DATA_BUFFER_GEN.RDATA_FIFO_I/DYNSHREG_F_I/Mshreg_Dout_16_0
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X71Y23.BMUX    Tshcko                0.591   default_peripheral_0/N12044
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_1
+    SLICE_X65Y23.B3      net (fanout=345)      1.156   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address<1>
+    SLICE_X65Y23.B       Tilo                  0.124   default_peripheral_0/N10626
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30111_SW1_SW0
+    SLICE_X77Y28.B5      net (fanout=1)        0.925   default_peripheral_0/N12087
+    SLICE_X77Y28.B       Tilo                  0.124   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data3019
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30111_SW1
+    SLICE_X74Y27.C1      net (fanout=2)        0.971   default_peripheral_0/N8663
+    SLICE_X74Y27.CMUX    Tilo                  0.543   default_peripheral_0/N8662
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30115_SW2_G
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30115_SW2
+    SLICE_X74Y22.A6      net (fanout=1)        0.623   default_peripheral_0/N18954
+    SLICE_X74Y22.A       Tilo                  0.124   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data34412
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30115
+    SLICE_X70Y15.B4      net (fanout=1)        0.911   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30114
+    SLICE_X70Y15.B       Tilo                  0.124   default_peripheral_0/N18744
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30127_SW0
+    SLICE_X70Y15.A4      net (fanout=1)        0.444   default_peripheral_0/N18744
+    SLICE_X70Y15.A       Tilo                  0.124   default_peripheral_0/N18744
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30127
+    SLICE_X53Y19.B6      net (fanout=1)        1.037   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30126
+    SLICE_X53Y19.B       Tilo                  0.124   default_peripheral_0/N18922
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30139_SW0
+    SLICE_X53Y19.A6      net (fanout=1)        0.483   default_peripheral_0/N18922
+    SLICE_X53Y19.A       Tilo                  0.124   default_peripheral_0/N18922
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30139
+    SLICE_X49Y33.B6      net (fanout=1)        0.974   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30138
+    SLICE_X49Y33.B       Tilo                  0.124   default_peripheral_0/N18890
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30154_SW0
+    SLICE_X49Y33.A6      net (fanout=1)        0.483   default_peripheral_0/N18890
+    SLICE_X49Y33.A       Tilo                  0.124   default_peripheral_0/N18890
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30154
+    SLICE_X53Y48.B6      net (fanout=1)        0.995   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30153
+    SLICE_X53Y48.B       Tilo                  0.124   default_peripheral_0/N18858
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30180_SW0
+    SLICE_X53Y48.A6      net (fanout=1)        0.483   default_peripheral_0/N18858
+    SLICE_X53Y48.A       Tilo                  0.124   default_peripheral_0/N18858
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30180
+    SLICE_X50Y48.AI      net (fanout=1)        0.323   default_peripheral_0/default_peripheral_0/user_IP2Bus_Data<15>
+    SLICE_X50Y48.CLK     Tds                   0.044   default_peripheral_0/N8774
+                                                       default_peripheral_0/default_peripheral_0/AXI_SLAVE_BURST_I/SUPPORT_RW_TRANSACTIONS.READ_DATA_SM_I/RD_DATA_BUFFER_GEN.RDATA_FIFO_I/DYNSHREG_F_I/Mshreg_Dout_16_0
+    -------------------------------------------------  ---------------------------
+    Total                                     12.350ns (2.542ns logic, 9.808ns route)
+                                                       (20.6% logic, 79.4% route)
+
+--------------------------------------------------------------------------------
+Slack:                  -2.490ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_1 (FF)
+  Destination:          default_peripheral_0/default_peripheral_0/AXI_SLAVE_BURST_I/SUPPORT_RW_TRANSACTIONS.READ_DATA_SM_I/RD_DATA_BUFFER_GEN.RDATA_FIFO_I/DYNSHREG_F_I/Mshreg_Dout_16_0 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      12.338ns (Levels of Logic = 12)
+  Clock Path Skew:      -0.117ns (0.759 - 0.876)
+  Source Clock:         processing_system7_0_FCLK_CLK0 rising at 0.000ns
+  Destination Clock:    processing_system7_0_FCLK_CLK0 rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_1 to default_peripheral_0/default_peripheral_0/AXI_SLAVE_BURST_I/SUPPORT_RW_TRANSACTIONS.READ_DATA_SM_I/RD_DATA_BUFFER_GEN.RDATA_FIFO_I/DYNSHREG_F_I/Mshreg_Dout_16_0
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X71Y23.BMUX    Tshcko                0.591   default_peripheral_0/N12044
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address_1
+    SLICE_X77Y27.A1      net (fanout=345)      1.558   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/read_address<1>
+    SLICE_X77Y27.A       Tilo                  0.124   default_peripheral_0/N5657
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30111_SW0_SW1
+    SLICE_X74Y27.B5      net (fanout=1)        0.618   default_peripheral_0/N12085
+    SLICE_X74Y27.B       Tilo                  0.124   default_peripheral_0/N8662
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30111_SW0
+    SLICE_X74Y27.C2      net (fanout=2)        0.864   default_peripheral_0/N8662
+    SLICE_X74Y27.CMUX    Tilo                  0.543   default_peripheral_0/N8662
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30115_SW2_G
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30115_SW2
+    SLICE_X74Y22.A6      net (fanout=1)        0.623   default_peripheral_0/N18954
+    SLICE_X74Y22.A       Tilo                  0.124   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data34412
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30115
+    SLICE_X70Y15.B4      net (fanout=1)        0.911   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30114
+    SLICE_X70Y15.B       Tilo                  0.124   default_peripheral_0/N18744
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30127_SW0
+    SLICE_X70Y15.A4      net (fanout=1)        0.444   default_peripheral_0/N18744
+    SLICE_X70Y15.A       Tilo                  0.124   default_peripheral_0/N18744
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30127
+    SLICE_X53Y19.B6      net (fanout=1)        1.037   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30126
+    SLICE_X53Y19.B       Tilo                  0.124   default_peripheral_0/N18922
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30139_SW0
+    SLICE_X53Y19.A6      net (fanout=1)        0.483   default_peripheral_0/N18922
+    SLICE_X53Y19.A       Tilo                  0.124   default_peripheral_0/N18922
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30139
+    SLICE_X49Y33.B6      net (fanout=1)        0.974   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30138
+    SLICE_X49Y33.B       Tilo                  0.124   default_peripheral_0/N18890
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30154_SW0
+    SLICE_X49Y33.A6      net (fanout=1)        0.483   default_peripheral_0/N18890
+    SLICE_X49Y33.A       Tilo                  0.124   default_peripheral_0/N18890
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30154
+    SLICE_X53Y48.B6      net (fanout=1)        0.995   default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30153
+    SLICE_X53Y48.B       Tilo                  0.124   default_peripheral_0/N18858
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30180_SW0
+    SLICE_X53Y48.A6      net (fanout=1)        0.483   default_peripheral_0/N18858
+    SLICE_X53Y48.A       Tilo                  0.124   default_peripheral_0/N18858
+                                                       default_peripheral_0/default_peripheral_0/USER_LOGIC_I/Mmux_IP2Bus_Data30180
+    SLICE_X50Y48.AI      net (fanout=1)        0.323   default_peripheral_0/default_peripheral_0/user_IP2Bus_Data<15>
+    SLICE_X50Y48.CLK     Tds                   0.044   default_peripheral_0/N8774
+                                                       default_peripheral_0/default_peripheral_0/AXI_SLAVE_BURST_I/SUPPORT_RW_TRANSACTIONS.READ_DATA_SM_I/RD_DATA_BUFFER_GEN.RDATA_FIFO_I/DYNSHREG_F_I/Mshreg_Dout_16_0
+    -------------------------------------------------  ---------------------------
+    Total                                     12.338ns (2.542ns logic, 9.796ns route)
+                                                       (20.6% logic, 79.4% route)
+
+--------------------------------------------------------------------------------
+
+
+1 constraint not met.
+
+
+Data Sheet report:
+-----------------
+No constraints were found to generate data for the Data Sheet Report section.
+Use the Advanced Analysis (-a) option or generate global constraints for each
+clock, its pad to setup and clock to pad paths, and a pad to pad constraint.
+
+Timing summary:
+---------------
+
+Timing errors: 267  Score: 174582  (Setup/Max: 174582, Hold: 0)
+
+Constraints cover 182216202 paths, 0 nets, and 106949 connections
+
+Design statistics:
+   Minimum period:  12.610ns   (Maximum frequency:  79.302MHz)
+
+
+Analysis completed Wed Oct 26 16:47:19 2016 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 900 MB
+
+
+

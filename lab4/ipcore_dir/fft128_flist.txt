@@ -1,0 +1,14 @@
+# Output products list for <fft128>
+fft128.asy
+fft128.gise
+fft128.ngc
+fft128.sym
+fft128.v
+fft128.veo
+fft128.xco
+fft128.xise
+fft128\doc\xfft_ds260.pdf
+fft128\doc\xfft_v7_1_readme.txt
+fft128\doc\xfft_v7_1_vinfo.html
+fft128_flist.txt
+fft128_xmdf.tcl

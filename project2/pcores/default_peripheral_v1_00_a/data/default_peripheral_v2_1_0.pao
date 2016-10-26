@@ -1,0 +1,14 @@
+##############################################################################
+## Filename:          E:/project2/pcores/default_peripheral_v1_00_a/data/default_peripheral_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Wed Oct 26 16:32:09 2016 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib proc_common_v3_00_a  all 
+lib axi_slave_burst_v1_00_a  all 
+lib default_peripheral_v1_00_a user_logic verilog
+lib default_peripheral_v1_00_a Audio verilog
+lib default_peripheral_v1_00_a fft128 verilog
+lib default_peripheral_v1_00_a Magnitude_Unit verilog
+lib default_peripheral_v1_00_a multiplier verilog
+lib default_peripheral_v1_00_a default_peripheral vhdl

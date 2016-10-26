@@ -1,0 +1,10 @@
+Command line:
+   tbfft_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  53159
+
+Wed Oct 26 14:50:49 2016
+
+
+ Elaboration Time: 0.312002 sec

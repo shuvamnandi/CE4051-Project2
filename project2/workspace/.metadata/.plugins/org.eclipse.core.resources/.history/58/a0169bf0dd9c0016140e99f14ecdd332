@@ -1,0 +1,232 @@
+
+#include <stdio.h>
+#include "audio.h"
+#include "oled.h"
+#include "sleep.h"
+#include <stdlib.h>
+#include "xparameters.h"
+#include "xbasic_types.h"
+#include "xstatus.h"
+#include "fft_hw.h"
+#include <math.h>
+#include <stdio.h>
+#include "xparameters.h"
+#include "xtime_l.h"
+
+
+//******************* Global variables & functions **********************//
+int AmbientWindow[128];//Ambient Noise vector
+int SlidingBuffer[8][128];//the most recent 8 windows.
+int WindowCounter = 0;
+//
+void WindowInit(int* Outarray, u8* OledBuffer);
+void Data_Arrange_Pos(Xint16* Data16, int* Data32);
+void Data_Arrange(Xint16* Data16, int* Data32);
+void Noise_Addition(int* flowdata, int FrameNo);
+void WindowOperating(int* X_R,int* Outarray);//This function stores the recent window and calculates the new average
+void AmbientCancellation(int* AvgBuffer, u8* FinBuffer);//This function deletes the ambient noise.
+
+int main()
+{
+	Xint16 audio_data[128];
+	u8 *Oled_Data=(u8 *)malloc(128*sizeof(u8));
+	
+	int Hw_data[64];//Data to Hardware
+	int FFT_Data[128];//Data from the Hardware
+	int AverageBuffer[128];
+	int Frame_number;//Frame number to distinguish between noise calculation & normal operation
+	
+	int flag;
+	
+	xil_printf("Starting... \n\r");
+
+	Xil_Out32(OLED_BASE_ADDR,0xff);
+	OLED_Init();			//oled init
+	IicConfig(XPAR_XIICPS_0_DEVICE_ID);
+	AudioPllConfig(); //enable core clock for ADAU1761
+	AudioConfigure();
+
+	// ****************************************
+	Xuint32 peripheral_baseaddr = XPAR_DEFAULT_PERIPHERAL_0_S_AXI_MEM0_BASEADDR ; // CHANGE THIS MACRO ACCORDING TO YOUR PERIPHERAL NAME
+	// *****************************************
+	
+	xil_printf("ADAU1761 configured\n\r");
+
+	
+	
+	Frame_number = 0; 
+	WindowInit(AverageBuffer, Oled_Data);
+	while(1)
+	{
+		int  j, i;
+
+		// Get Audio data
+		get_audio(audio_data);
+		for(i=0;i<128;i++)
+		{
+			audio_data[i] = audio_data[i]/16;
+		}
+
+		//Initialize the timer and Start
+
+		XTime time_start;
+		XTime time_end;
+		XTime_GetTime((XTime *) &time_start);
+
+	// *********************** Sending Data to the hardware *******************//
+		//Arrange transmitted data
+		Data_Arrange_Pos(audio_data, Hw_data);
+
+		// Write Data to the memory and start the process
+		j = 0; //index of the hw_data
+		for (i=0; i<512; i=i+8){
+			printf("In Data -------- %d\n",audio_data[i>>2]);
+			HW_WriteMemory(peripheral_baseaddr+i, Hw_data[j]);
+			j = j + 1;
+		}
+		HW_WriteMemory(peripheral_baseaddr+512, 1); //To start the process
+		//printf("Wrote data\n");
+
+	// *********************** Recieving Data from the hardware *******************//
+		// Providing a delay till hardware processing is finished 
+		do{
+			flag =  HW_ReadMemory(peripheral_baseaddr+512);
+		}while(flag != 1);
+		
+		// Read data
+		j = 0;
+		for (i=0; i<512; i=i+4){
+			//printf("Read data\n");
+			FFT_Data[j] =  HW_ReadMemory(peripheral_baseaddr+i) << 14;
+			if(FFT_Data[j] < 0){
+					FFT_Data[j] = 4294967296-1;
+			}
+			xil_printf("Reading data %d\n",FFT_Data[i>>2]);
+			j++;
+		}
+		//printf("Done reading data\n");
+
+	// *********************** Averaging & Noise Cancellation *******************//
+		if (Frame_number <1024)
+		{
+			Noise_Addition(FFT_Data, Frame_number);
+			Frame_number++;
+			xil_printf("Frame Number %d\n",Frame_number);
+		}
+		else
+		{
+			WindowOperating(FFT_Data, AverageBuffer);
+			AmbientCancellation(AverageBuffer, Oled_Data);
+		}
+			
+		//End timer to get the duration
+		XTime_GetTime((XTime *) &time_end);
+		xil_printf("Communication time %f us\n\r", (1.0*(time_end-time_start))/(XPAR_CPU_CORTEXA9_0_CPU_CLK_FREQ_HZ/(2*1000000.0)));
+		//////////////////////////////////////////////////////////////////////
+		Frame_number++;
+		//Output to the OLED
+		OLED_Clear();
+		OLED_Equalizer_128(10001010);
+	}
+    return 0;
+}
+
+// **************************************** Functions ****************************************** //
+void WindowInit(int* Outarray, u8* OledBuffer)
+{
+int i, j;
+for(j=0;j<128;j++)
+{
+	for(i=0; i<8;i++)
+	{
+	SlidingBuffer[i][j]=0;
+	}
+	Outarray[j]=0;
+	OledBuffer =0;
+	AmbientWindow[j]=0;
+}
+}
+// ---------------------------------------------------------------------------------------------------------
+void Data_Arrange(Xint16* Data16, int* Data32)//Convert the audio data to 32-bits before sending them to HW 
+											//by concatenating each two subsequent samples into one 32-bits sample. 
+{
+	int i, j;
+	int u1, u2;
+	
+	j = 0;
+	for(i = 0; i < 64; i++)
+	{
+		u1 = Data16[j]<<16;
+		u2 = Data16[j+1] & 0x0000ffff; 
+		Data32[i] = u1 | u2;
+		j =j+2;
+	}
+}
+//------------------------------------------------------------------------
+void Data_Arrange_Pos(Xint16* Data16, int* Data32)//Convert the audio data to 32-bits before sending them to HW 
+											//by concatenating each two subsequent samples into one 32-bits sample. 
+{
+	int i, j;
+	int u1, u2;
+	
+	j = 0;
+	for(i = 0; i < 64; i++)
+	{
+		if(Data16[j]<0)
+			{Data16[j] = -Data16[j];}
+		if(Data16[j+1]<0)
+			{Data16[j+1] = -Data16[j+1];}
+		
+		u2 = Data16[j+1]<<16;
+		u1 = Data16[j] & 0x0000ffff;
+		Data32[i] = u1 | u2;
+		j =j+2;
+	}
+}
+
+//------------------------------------------------------------------------
+void Noise_Addition(int* flowdata, int FrameNo)
+{
+	int i;
+	for(i=0; i<128; i++)
+	{
+		AmbientWindow[i] += flowdata[i];
+		if(FrameNo == 1023)
+		{
+		AmbientWindow[i] = (AmbientWindow[i]>>10);
+		}
+	}
+}
+
+//-----------------------------------------------------------------------
+void WindowOperating(int* X_R, int* Outarray)
+{
+	int i;
+	int Buffer_index = WindowCounter%8;
+
+	for(i = 0; i < 128; i++ ){
+		Outarray[i] += (X_R[i] - SlidingBuffer[Buffer_index][i])/8;
+		SlidingBuffer[Buffer_index][i] = X_R[i];
+	}
+	WindowCounter++;
+}
+
+//----------------------------------------------------------------------
+void AmbientCancellation(int* AvgBuffer, u8* FinBuffer)
+{
+	int i;
+	int temp;
+	for(i=0; i<128; i++)
+	{
+		temp = AvgBuffer[i]- AmbientWindow[i];
+		if(temp < 0)
+		{
+			temp = 0;
+		}
+		//else if (temp > 32767)
+		//{
+		//	temp = 32767;
+		//}
+		FinBuffer[i]=temp >> 20 ;//convert to 8-bits
+	}
+}

@@ -80,7 +80,7 @@ int main()
 		// Write Data to the memory and start the process
 		j = 0; //index of the hw_data
 		for (i=0; i<512; i=i+8){
-			printf("In Data -------- %d\n",audio_data[i>>2]);
+			//printf("In Data -------- %d\n",audio_data[i>>2]);
 			HW_WriteMemory(peripheral_baseaddr+i, Hw_data[j]);
 			j = j + 1;
 		}
@@ -93,21 +93,23 @@ int main()
 			flag =  HW_ReadMemory(peripheral_baseaddr+512);
 		}while(flag != 1);
 		
-		// Read data 
+		// Read data
 		j = 0;
 		for (i=0; i<512; i=i+4){
 			//printf("Read data\n");
-			FFT_Data[j] =  HW_ReadMemory(peripheral_baseaddr+i) << 14;
+			FFT_Data[j] =  HW_ReadMemory(peripheral_baseaddr+i);
 			if(FFT_Data[j] < 0){
 					FFT_Data[j] = 4294967296-1;
 			}
+			Oled_Data[j] = FFT_Data[j];
+			//OLED_Equalizer_128(Oled_Data);
 			//xil_printf("Reading data %d\n",FFT_Data[i>>2]);
 			j++;
 		}
 		//printf("Done reading data\n");
 
 	// *********************** Averaging & Noise Cancellation *******************//
-		if (Frame_number <1024)
+		if (Frame_number <102400000)
 		{
 			Noise_Addition(FFT_Data, Frame_number);
 			Frame_number++;
@@ -121,10 +123,13 @@ int main()
 			
 		//End timer to get the duration
 		XTime_GetTime((XTime *) &time_end);
-		xil_printf("Communication time %f us\n\r", (1.0*(time_end-time_start))/(XPAR_CPU_CORTEXA9_0_CPU_CLK_FREQ_HZ/(2*1000000.0)));
+		printf("Latency Value %f us\n\r", (1.0*(time_end-time_start))/(XPAR_CPU_CORTEXA9_0_CPU_CLK_FREQ_HZ/(2*1000000.0)));
 		//////////////////////////////////////////////////////////////////////
 		Frame_number++;
 		//Output to the OLED
+//		u8 *temp;
+//		temp[0]=Oled_Data[1];
+//		temp[1]=Oled_Data[2];
 		OLED_Clear();
 		OLED_Equalizer_128(Oled_Data);
 	}

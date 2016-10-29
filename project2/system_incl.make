@@ -130,7 +130,13 @@ C:/Xilinx/ISE14.4/14.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_slave_burst
 C:/Xilinx/ISE14.4/14.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_slave_burst_v1_00_a/hdl/vhdl/read_data_path.vhd \
 C:/Xilinx/ISE14.4/14.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_slave_burst_v1_00_a/hdl/vhdl/address_decode.vhd \
 C:/Xilinx/ISE14.4/14.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_slave_burst_v1_00_a/hdl/vhdl/addr_gen.vhd \
-C:/Xilinx/ISE14.4/14.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_slave_burst_v1_00_a/hdl/vhdl/axi_slave_burst.vhd
+C:/Xilinx/ISE14.4/14.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_slave_burst_v1_00_a/hdl/vhdl/axi_slave_burst.vhd \
+pcores/default_peripheral_v1_00_a/hdl/verilog/user_logic.v \
+pcores/default_peripheral_v1_00_a/hdl/verilog/Audio.v \
+pcores/default_peripheral_v1_00_a/hdl/verilog/fft128.v \
+pcores/default_peripheral_v1_00_a/hdl/verilog/Magnitude_Unit.v \
+pcores/default_peripheral_v1_00_a/hdl/verilog/multiplier.v \
+pcores/default_peripheral_v1_00_a/hdl/vhdl/default_peripheral.vhd
 
 WRAPPER_NGC_FILES = implementation/system_processing_system7_0_wrapper.ngc \
 implementation/system_axi_interconnect_1_wrapper.ngc \

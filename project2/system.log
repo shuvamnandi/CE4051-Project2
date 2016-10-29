@@ -1595,3 +1595,66 @@ Xilinx Software Development Kit
 Xilinx EDK 14.4 Build EDK_P.49d
 Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
 Done!
+Writing filter settings....
+Done writing filter settings to:
+	E:\project2\etc\system.filters
+Done writing Tab View settings to:
+	E:\project2\etc\system.gui
+Xilinx Platform Studio (XPS)
+Xilinx EDK 14.4 Build EDK_P.49d
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+
+********************************************************************************
+At Local date and time: Fri Oct 28 14:29:12 2016
+ make -f system.make bits started...
+make: Nothing to be done for `bits'.
+Done!
+
+********************************************************************************
+At Local date and time: Fri Oct 28 14:29:45 2016
+ make -f system.make bits started...
+make: Nothing to be done for `bits'.
+Done!
+
+********************************************************************************
+At Local date and time: Fri Oct 28 14:29:54 2016
+ make -f system.make exporttosdk started...
+make: Nothing to be done for `exporttosdk'.
+Done!
+
+********************************************************************************
+At Local date and time: Fri Oct 28 14:29:54 2016
+ xsdk.exe -hwspec E:\project2\SDK\SDK_Export\hw\system.xml started...
+Xilinx Software Development Kit
+Xilinx EDK 14.4 Build EDK_P.49d
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+Done!
+
+********************************************************************************
+At Local date and time: Fri Oct 28 15:39:23 2016
+ make -f system.make exporttosdk started...
+make: Nothing to be done for `exporttosdk'.
+Done!
+
+********************************************************************************
+At Local date and time: Fri Oct 28 15:39:23 2016
+ xsdk.exe -hwspec E:\project2\SDK\SDK_Export\hw\system.xml started...
+Xilinx Software Development Kit
+Xilinx EDK 14.4 Build EDK_P.49d
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+Done!
+
+********************************************************************************
+At Local date and time: Fri Oct 28 16:17:23 2016
+ make -f system.make exporttosdk started...
+make: Nothing to be done for `exporttosdk'.
+Done!
+
+********************************************************************************
+At Local date and time: Fri Oct 28 16:17:24 2016
+ xsdk.exe -hwspec E:\project2\SDK\SDK_Export\hw\system.xml started...
+Xilinx Software Development Kit
+Xilinx EDK 14.4 Build EDK_P.49d
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+Done!

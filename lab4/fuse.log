@@ -47,5 +47,5 @@ Waiting for 1 sub-compilation(s) to finish...
 Compiled 9 VHDL Units
 Compiled 74 Verilog Units
 Built simulation executable E:/lab4/tbfft_isim_beh.exe
-Fuse Memory Usage: 51772 KB
-Fuse CPU Usage: 1029 ms
+Fuse Memory Usage: 51780 KB
+Fuse CPU Usage: 1028 ms

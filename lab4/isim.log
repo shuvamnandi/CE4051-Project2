@@ -9,4 +9,4 @@ Time resolution is 1 ps
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
 # run all
-Stopped at time : 13548800 ns : File "C:/Users/gchristi001/Downloads/tbfft.vhd" Line 119
+Stopped at time : 1847412600 ps : File "E:/lab4/ipcore_dir/fft128.v" Line 2095
